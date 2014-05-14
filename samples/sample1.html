@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<meta charset="utf8">
+<head>
+    <script src="../build/bbCodeParser.min.js"></script>
+</head>
+<body>
+	<textarea id="input" cols="100" rows="20"></textarea>
+	<br>
+	<button onclick="parseInput()">Parse</button>
+	<br>
+	<div id="output"></div>
+	<script type="text/javascript">
+		var parser = new BBCodeParser(BBCodeParserSettings.defaultTags());
+
+		function parseInput() {
+			var inputText = input.value;
+			var generatedHtml = parser.parseString(inputText);
+			output.innerHTML = generatedHtml;
+		}
+</script>
+</body>
+</html>

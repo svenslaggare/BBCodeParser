@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<meta charset="utf8">
+<head>
+    <script src="../build/bbCodeParser.min.js"></script>
+</head>
+<body>
+	<textarea id="input" cols="100" rows="20"></textarea>
+	<br>
+	<button onclick="parseInput()">Parse</button>
+	<br>
+	<div id="output"></div>
+	<script type="text/javascript">
+		var bbTags = {};
+
+		//Simple tag. A simple tag means that the generated HTML will be <tagName>content</tagName>
+		bbTags["b"] = new BBTag("b", true, false, false);
+
+		//Tag with a custom generator. 
+		bbTags["img"] = new BBTag("img", true, false, false, function(tag, content, attr) {
+			return "<img src=\"" + content + "\" />";
+		});
+
+		//Tag with a custom generator + attributes
+		bbTags["url"] = new BBTag("url", true, false, false, function(tag, content, attr) {
+        	var link = content;
+
+       		if (attr["site"] != undefined) {
+       			link = escapeHTML(attr["site"]);
+       	 	}
+
+       		if (!startsWith(link, "http://") && !startsWith(link, "https://")) {
+        		link = "http://" + link;
+       		}
+
+        	return "<a href=\"" + link + "\" target=\"_blank\">" + content + "</a>";
+        });
+
+        //A tag that doesn't support nested tags. Useful when implementing code highlighting.
+        bbTags["code"] = new BBTag("code", true, false, true, (tag, content, attr) => {
+            return "<code>" + content + "</code>";
+        });
+
+		var parser = new BBCodeParser(bbTags);
+
+		function parseInput() {
+			var inputText = input.value;
+			var generatedHtml = parser.parseString(inputText);
+			output.innerHTML = generatedHtml;
+		}
+</script>
+</body>
+</html>
