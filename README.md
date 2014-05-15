@@ -56,3 +56,8 @@ bbTags["code"] = new BBTag("code", true, false, true, (tag, content, attr) => {
 
 var parser = new BBCodeParser(bbTags);
 ```
+#Build
+To run the build script you need:
+* NodeJS
+* TypeScript (npm install -g typescript)
+* uglify-js (npm install uglify-js -g)
