@@ -12,16 +12,11 @@ var generatedHtml = parser.parseString(inputText);
 ```
 #Custom tags
 <b>BBTag constructor:</b>
-<br>
-tagName: The name of the tag.
-<br>
-insertLineBreaks: Indicates if the tag inserts line breaks (\n -> `<br>`) in the content.
-<br>
-suppressLineBreaks: Suppresses line breaks for any nested tag.
-<br>
-noNesting: If the tags doesn't support nested tags.
-<br>
-tagGenerator: The HTML generator for the tag. If not supplied the default one is used: `<tagName>content</tagName>`.
+* tagName: The name of the tag.
+* insertLineBreaks: Indicates if the tag inserts line breaks (\n -> `<br>`) in the content.
+* suppressLineBreaks: Suppresses line breaks for any nested tag.
+* noNesting: If the tags doesn't support nested tags.
+* tagGenerator: The HTML generator for the tag. If not supplied the default one is used: `<tagName>content</tagName>`.
 
 ```javascript
 var bbTags = {};
@@ -38,13 +33,13 @@ bbTags["img"] = new BBTag("img", true, false, false, function(tag, content, attr
 bbTags["url"] = new BBTag("url", true, false, false, function(tag, content, attr) {
 	var link = content;
 
-		if (attr["site"] != undefined) {
-			link = escapeHTML(attr["site"]);
-	 	}
+	if (attr["site"] != undefined) {
+		link = escapeHTML(attr["site"]);
+ 	}
 
-		if (!startsWith(link, "http://") && !startsWith(link, "https://")) {
+	if (!startsWith(link, "http://") && !startsWith(link, "https://")) {
 		link = "http://" + link;
-		}
+	}
 
 	return "<a href=\"" + link + "\" target=\"_blank\">" + content + "</a>";
 });

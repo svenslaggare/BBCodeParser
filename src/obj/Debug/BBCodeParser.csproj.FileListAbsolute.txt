@@ -1,0 +1,17 @@
+C:\Users\Anton Jansson\Documents\Programmering\Mercurial\DocChat\DocChat\BBCodeParser\bin\BBCodeParser.dll
+C:\Users\Anton Jansson\Documents\Programmering\Mercurial\DocChat\DocChat\BBCodeParser\bin\BBCodeParser.pdb
+C:\Users\Anton Jansson\Documents\Programmering\Mercurial\DocChat\DocChat\BBCodeParser\obj\Debug\BBCodeParser.csprojResolveAssemblyReference.cache
+C:\Users\Anton Jansson\Documents\Programmering\Mercurial\DocChat\DocChat\BBCodeParser\obj\Debug\BBCodeParser.dll
+C:\Users\Anton Jansson\Documents\Programmering\Mercurial\DocChat\DocChat\BBCodeParser\obj\Debug\BBCodeParser.pdb
+C:\Users\Anton Jansson\Documents\Programmering\Mercurial\DocChat\BBCodeParser\bin\BBCodeParser.dll.config
+C:\Users\Anton Jansson\Documents\Programmering\Mercurial\DocChat\BBCodeParser\bin\BBCodeParser.dll
+C:\Users\Anton Jansson\Documents\Programmering\Mercurial\DocChat\BBCodeParser\bin\BBCodeParser.pdb
+C:\Users\Anton Jansson\Documents\Programmering\Mercurial\DocChat\BBCodeParser\obj\Debug\BBCodeParser.csprojResolveAssemblyReference.cache
+C:\Users\Anton Jansson\Documents\Programmering\Mercurial\DocChat\BBCodeParser\obj\Debug\BBCodeParser.dll
+C:\Users\Anton Jansson\Documents\Programmering\Mercurial\DocChat\BBCodeParser\obj\Debug\BBCodeParser.pdb
+C:\Users\Anton Jansson\Documents\GitHub\BBCodeParser\BBCodeParser\bin\BBCodeParser.dll.config
+C:\Users\Anton Jansson\Documents\GitHub\BBCodeParser\BBCodeParser\bin\BBCodeParser.dll
+C:\Users\Anton Jansson\Documents\GitHub\BBCodeParser\BBCodeParser\bin\BBCodeParser.pdb
+C:\Users\Anton Jansson\Documents\GitHub\BBCodeParser\BBCodeParser\obj\Debug\BBCodeParser.csprojResolveAssemblyReference.cache
+C:\Users\Anton Jansson\Documents\GitHub\BBCodeParser\BBCodeParser\obj\Debug\BBCodeParser.dll
+C:\Users\Anton Jansson\Documents\GitHub\BBCodeParser\BBCodeParser\obj\Debug\BBCodeParser.pdb
