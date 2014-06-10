@@ -1,5 +1,5 @@
-BBCodeParser/bin
-BBCodeParser/obj
-BBCodeParser/BBCodeParser.csproj.user
-BBCodeParser/web.config
-BBCodeParser/*.js
+src/bin
+src/obj
+src/BBCodeParser.csproj.user
+src/web.config
+src/*.js
