@@ -47,10 +47,10 @@ class TestTokenizer extends tsUnit.TestClass {
         this.isTrue(new Token("b", TokenType.EndTag).equals(tokens[7]));
         this.isTrue(new Token("då", TokenType.Text).equals(tokens[8]));
 
-        tokens = tokenizer.tokenizeString("[math][[1,2,3],[4,5,6]][/math]");
-        this.isTrue(new Token("math", TokenType.StartTag).equals(tokens[0]));
+        tokens = tokenizer.tokenizeString("[code][[1,2,3],[4,5,6]][/code]");
+        this.isTrue(new Token("code", TokenType.StartTag).equals(tokens[0]));
         this.isTrue(new Token("[[1,2,3],[4,5,6]]", TokenType.Text).equals(tokens[1]));
-        this.isTrue(new Token("math", TokenType.EndTag).equals(tokens[2]));
+        this.isTrue(new Token("code", TokenType.EndTag).equals(tokens[2]));
 
         tokens = tokenizer.tokenizeString("[code]var elo = tja[0];[/code]");
         this.isTrue(new Token("code", TokenType.StartTag).equals(tokens[0]));
@@ -106,13 +106,13 @@ class TestTokenizer extends tsUnit.TestClass {
         this.areIdentical("js", parseTree.subTrees[1].attributes["lang"]);
 
         //Suppressed nesting
-        parseTree = BBCodeParseTree.buildTree("bra [math][[1,2,3],[4,5,6]][/math]?", tags);
+        parseTree = BBCodeParseTree.buildTree("bra [code][[1,2,3],[4,5,6]][/code]?", tags);
         this.areIdentical(3, parseTree.subTrees.length);
         this.areIdentical(true, parseTree.isValid());
 
         this.areIdentical("Text - bra ", parseTree.subTrees[0].toString());
 
-        this.areIdentical("Tag - math", parseTree.subTrees[1].toString());
+        this.areIdentical("Tag - code", parseTree.subTrees[1].toString());
         this.areIdentical("Text - [[1,2,3],[4,5,6]]", parseTree.subTrees[1].subTrees[0].toString());
         this.areIdentical(1, parseTree.subTrees[1].subTrees.length);
 
@@ -135,8 +135,8 @@ class TestTokenizer extends tsUnit.TestClass {
         htmlStr = parser.parseString("tja [b][i]alla[/i][/b] noobs");
         this.areIdentical("tja <b><i>alla</i></b> noobs", htmlStr);
 
-        htmlStr = parser.parseString("bra [math]x=e^x[/math]?\n[b]Okej da![/b]");
-        this.areIdentical("bra `x=e^x`?<br><b>Okej da!</b>", htmlStr);
+        htmlStr = parser.parseString("bra [code]x=e^x[/code]?\n[b]Okej da![/b]");
+        this.areIdentical("bra <code>x=e^x</code>?<br><b>Okej da!</b>", htmlStr);
 
         htmlStr = parser.parseString("tja [b]fan[/b da");
         this.areIdentical("tja [b]fan[/b da", htmlStr);
@@ -149,7 +149,7 @@ class TestTokenizer extends tsUnit.TestClass {
 
         htmlStr = parser.parseString("Kod: [code lang=\"javascript\"]function troll() { return lol(); }[/code]");
         console.log(htmlStr);
-        this.areIdentical("Kod: <highlightCode class=\"language-javascript\">function troll() { return lol(); }</highlightCode>", htmlStr);
+        this.areIdentical("Kod: <code class=\"javascript\">function troll() { return lol(); }</code>", htmlStr);
 
         htmlStr = parser.parseString("Test\r\ndå!");
         this.areIdentical("Test<br>då!", htmlStr);

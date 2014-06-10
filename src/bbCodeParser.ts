@@ -149,6 +149,16 @@ class BBCodeParserSettings {
             return "<a href=\"" + link + "\" target=\"_blank\">" + content + "</a>";
         });
 
+        bbTags["code"] = new BBTag("code", true, false, true, (tag, content, attr) => {
+            var lang = attr["lang"];
+
+            if (lang !== undefined) {
+                return "<code class=\"" + attr["lang"] + "\">" + content + "</code>";
+            } else {
+                return "<code>" + content + "</code>";
+            }
+        });
+
         return bbTags;
     }
 }
