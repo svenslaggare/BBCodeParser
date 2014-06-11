@@ -35,7 +35,7 @@ class BBCodeParseTree {
         return TreeType[this.treeType] + " - " + this.content;
     }
 
-    //Builds an parse tree from the given string
+    //Builds a parse tree from the given string
     public static buildTree(str: string, bbTags: Array<BBTag>) {
         //Get the tokens
         var tokenizer = new Tokenizer(bbTags);
@@ -49,7 +49,7 @@ class BBCodeParseTree {
             tokens.reverse());
     }
 
-    //Builds an tree from the given tokens
+    //Builds a tree from the given tokens
     private static buildTreeFromTokens(rootTree: BBCodeParseTree, tokens: Array<Token>, currentTag = ""): BBCodeParseTree {
         //The root root is invalid, return null
         if (rootTree == null) {
@@ -64,7 +64,7 @@ class BBCodeParseTree {
         //Remove the first token
         var currentToken = tokens.pop();
 
-        //Add the text token as an text parse tree
+        //Add the text token as a text parse tree
         if (currentToken.tokenType == TokenType.Text) {
             rootTree.subTrees.push(new BBCodeParseTree(
                 TreeType.Text,

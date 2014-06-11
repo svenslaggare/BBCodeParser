@@ -1,9 +1,9 @@
 ﻿/// <reference path="bbCodeParser.ts" />
 
-//The type of an token
+//The type of a token
 enum TokenType { Text, StartTag, EndTag }
 
-//Represents an token
+//Represents a token
 class Token {
     constructor(public content: string, public tokenType: TokenType, public tagAttributes?: Array<string>) {
            
@@ -20,14 +20,14 @@ class Token {
     }
 }
 
-//Represents an tokenizer
+//Represents a tokenizer
 class Tokenizer {
     //Creates an new tokenizer with the given tags
     constructor(public bbTags: Array<BBTag>) {
 
     }
 
-    //Indicates if the given string is an start token
+    //Indicates if the given string is a start token
     isStartTag(str: string) {
         return str[0] == '[' && str[str.length - 1] == ']';
     }
@@ -37,7 +37,7 @@ class Tokenizer {
         return str[0] == '[' && str[1] == '/' && str[str.length - 1] == ']';
     }
 
-    //Creates an text token from the given content
+    //Creates a text token from the given content
     createTextToken(content: string) {
         return new Token(content, TokenType.Text);
     }
@@ -52,13 +52,13 @@ class Tokenizer {
         return new Token(endTag, TokenType.EndTag);
     }
 
-    //Creates an simple end token from the given string
+    //Creates a simple end token from the given string
     createSimpleEndTagToken(str: string) {
         str = str.substr(2, str.length - 3);
         return new Token(str, TokenType.EndTag);
     }
 
-    //Creates an start token from the given string
+    //Creates a start token from the given string
     createStartTagToken(str: string) {
         str = str.substr(1, str.length - 2);
 
@@ -183,10 +183,10 @@ class Tokenizer {
 
             //Check if nesting is supported
             if (!suppressNesting) {
-                //The start of an tag
+                //The start of a tag
                 if (str[i] == '[') {
                     if (currentStr.length > 1) {
-                        //An inner part of an tag is text
+                        //An inner part of a tag is text
                         var content = currentStr.substr(0, currentStr.length - 1);
 
                         if (content != "") {
@@ -208,8 +208,7 @@ class Tokenizer {
                         if (i == str.length - 1) {
                             endedInTag = true;
                         }
-                    }
-                    else if (this.isStartTag(currentStr)) {
+                    } else if (this.isStartTag(currentStr)) {
                         if (!suppressNesting) {
                             //The current string is an start tag
                             var startTag = this.createStartTagToken(currentStr);
@@ -249,7 +248,7 @@ class Tokenizer {
             i++;
         }
 
-        //The string didn't end in an tag, add the rest as an text token
+        //The string didn't end in a tag, add the rest as a text token
         if (!endedInTag) {
             var content = currentStr.substr(0, currentStr.length);
 

@@ -12,7 +12,7 @@ function endsWith(str: string, endStr: string) {
     return endStr == inStrEnd;
 }
 
-//Indicates if the first string starts with the second str
+//Indicates if the first string starts with the second string
 function startsWith(str: string, startStr: string) {
     if (str.length == 0) {
         return false;
@@ -25,14 +25,6 @@ function startsWith(str: string, startStr: string) {
     var inStrStart = str.substr(0, startStr.length);
     return startStr == inStrStart;
 }
-
-//var escape = document.createElement("textarea");
-
-////Escapes the given html
-//function escapeHTML(html) {
-//    escape.innerHTML = html;
-//    return escape.innerHTML;
-//}
 
 var tagsToReplace = {
     '&': '&amp;',
@@ -63,11 +55,16 @@ class BBTag {
             };
         }
     }
+
+    //Creates a new simple tag
+    public static createSimpleTag(tagName: string, insertLineBreaks: boolean = true) {
+        return new BBTag(tagName, insertLineBreaks, false, false);
+    }
 }
 
-//Represents an BB code parser
+//Represents a BB code parser
 class BBCodeParser {
-    //Creates an new parser with the given tags
+    //Creates a new parser with the given tags
     constructor(private bbTags: Array<BBTag>) {
 
     }
@@ -153,7 +150,7 @@ class BBCodeParserSettings {
             var lang = attr["lang"];
 
             if (lang !== undefined) {
-                return "<code class=\"" + attr["lang"] + "\">" + content + "</code>";
+                return "<code class=\"" + escapeHTML(lang) + "\">" + content + "</code>";
             } else {
                 return "<code>" + content + "</code>";
             }
