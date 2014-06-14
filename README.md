@@ -25,12 +25,12 @@ var bbTags = {};
 bbTags["b"] = new BBTag("b", true, false, false);
 
 //Tag with a custom generator.
-bbTags["img"] = new BBTag("img", true, false, false, function(tag, content, attr) {
+bbTags["img"] = new BBTag("img", true, false, false, function (tag, content, attr) {
 	return "<img src=\"" + content + "\" />";
 });
 
 //Tag with a custom generator + attributes
-bbTags["url"] = new BBTag("url", true, false, false, function(tag, content, attr) {
+bbTags["url"] = new BBTag("url", true, false, false, function (tag, content, attr) {
 	var link = content;
 
 	if (attr["site"] != undefined) {
@@ -45,7 +45,7 @@ bbTags["url"] = new BBTag("url", true, false, false, function(tag, content, attr
 });
 
 //A tag that doesn't support nested tags. Useful when implementing code highlighting.
-bbTags["code"] = new BBTag("code", true, false, true, (tag, content, attr) => {
+bbTags["code"] = new BBTag("code", true, false, true, function (tag, content, attr) {
     return "<code>" + content + "</code>";
 });
 
