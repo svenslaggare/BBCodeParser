@@ -22,7 +22,7 @@ class Token {
 
 //Represents a tokenizer
 class Tokenizer {
-    //Creates an new tokenizer with the given tags
+    //Creates a new tokenizer with the given tags
     constructor(public bbTags: Array<BBTag>) {
 
     }
@@ -98,7 +98,7 @@ class Tokenizer {
                     parseName = false;
                 }
             } else {
-                //Start an new attribute
+                //Start a new attribute
                 if (!parseName && !parseValue) {
                     if (currentChar == ' ') {
                         attrNameStart = i + 1;
@@ -198,7 +198,7 @@ class Tokenizer {
                     currentStrStart = i;
                 }
 
-                //An tag must be atleast 3 characters long
+                //Tag must be atleast 3 characters long
                 if (currentStr.length >= 3) {
                     //The current string is an end tag
                     if (this.isEndTag(currentStr)) {

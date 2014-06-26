@@ -1,4 +1,6 @@
-﻿//Indicates if the first string ends with the second str
+﻿/// <reference path="bbCodeParseTree.ts" />
+
+//Indicates if the first string ends with the second str
 function endsWith(str: string, endStr: string) {
     if (str.length == 0) {
         return false;
@@ -39,9 +41,9 @@ function escapeHTML(html) {
     });
 }
 
-//Represents an BB tag
+//Represents a BB tag
 class BBTag {
-    //Creates an new BB tag
+    //Creates a new BB tag
     constructor(
         public tagName: string, //The name of the tag
         public insertLineBreaks: boolean, //Indicates if line breaks are inserted inside the tag content
@@ -59,6 +61,11 @@ class BBTag {
     //Creates a new simple tag
     public static createSimpleTag(tagName: string, insertLineBreaks: boolean = true) {
         return new BBTag(tagName, insertLineBreaks, false, false);
+    }
+
+    //Creates a tag with the given generator
+    public static createTag(tagName: string, markupGenerator: (tag: BBTag, content: string, attr: Array<string>) => string, insertLineBreaks: boolean = true) {
+        return new BBTag(tagName, insertLineBreaks, false, false, markupGenerator);
     }
 }
 
@@ -116,7 +123,7 @@ class BBCodeParser {
 //The parser settings
 class BBCodeParserSettings {
     //Returns the default tags
-    static defaultTags(languages?: Array<String>): Array<BBTag> {
+    static defaultTags(): Array<BBTag> {
         var bbTags = new Array<BBTag>();
 
         //Simple tags

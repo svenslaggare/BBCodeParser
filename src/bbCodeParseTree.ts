@@ -4,9 +4,9 @@
 //The types of the trees
 enum TreeType { Root, Text, Tag }
 
-//Represents an parse tree
+//Represents a parse tree
 class BBCodeParseTree {
-    //Creates an new parse tree
+    //Creates a new parse tree
     constructor(public treeType: TreeType, public content: string, public attributes?: Array<String>, public subTrees?: Array<BBCodeParseTree>) {
         this.subTrees = new Array<BBCodeParseTree>();
     }
@@ -71,7 +71,7 @@ class BBCodeParseTree {
                 currentToken.content));
         }
 
-        //Create an new tag tree and find its subtrees
+        //Create a new tag tree and find its subtrees
         if (currentToken.tokenType == TokenType.StartTag) {
             var tagName = currentToken.content;
             rootTree.subTrees.push(
