@@ -1,15 +1,24 @@
 BBCodeParser
 ============
-BB code parser writen in TypeScript.
+BB code parser written in TypeScript.
 
 #Usage
 ```javascript
 <script src="bbCodeParser.min.js"></script>
 ...
-var parser = new BBCodeParser(BBCodeParserSettings.defaultTags());
+var parser = new BBCodeParser(BBCodeParser.defaultTags());
 var inputText = "[b]Bold text[/b]";
 var generatedHtml = parser.parseString(inputText);
 ```
+
+Node.js: `npm install bbcode-parser`
+
+``` javascript
+var BBCodeParser = require('bbcode-parser');
+var parser = new BBCodeParser(BBCodeParser.defaultTags());
+var html = parser.parseString('[b]Bold text[/b]');
+```
+
 #Custom tags
 <b>BBTag constructor:</b>
 * tagName: The name of the tag.
@@ -51,8 +60,12 @@ bbTags["code"] = new BBTag("code", true, false, true, function (tag, content, at
 
 var parser = new BBCodeParser(bbTags);
 ```
+
+#Documentation
+[See the wiki](https://github.com/svenslaggare/BBCodeParser/wiki/Documentation).
+
 #Build
 To run the build script you need:
-* NodeJS
+* Node.js
 * TypeScript (npm install -g typescript)
 * uglify-js (npm install uglify-js -g)

@@ -86,7 +86,7 @@ class BBCodeParseTree {
 
         //Check if its the correct end tag
         if (currentToken.tokenType == TokenType.EndTag) {
-             var tagName = currentToken.content;
+            var tagName = currentToken.content;
 
             if (tagName == currentTag) {
                 return rootTree;

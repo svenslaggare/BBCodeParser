@@ -6,12 +6,12 @@ enum TokenType { Text, StartTag, EndTag }
 //Represents a token
 class Token {
     constructor(public content: string, public tokenType: TokenType, public tagAttributes?: Array<string>) {
-           
+
     }
 
     //String representation of the token
     toString() {
-        return this.content + " (" + TokenType[this.tokenType] +  ")";
+        return this.content + " (" + TokenType[this.tokenType] + ")";
     }
 
     //Check for equality
@@ -219,7 +219,7 @@ class Tokenizer {
 
                             //Check if their exist an bb tag for the current tag
                             var bbTag: BBTag = this.bbTags[startTag.content];
-                            
+
                             if (bbTag != undefined) {
                                 if (bbTag.noNesting) {
                                     suppressNesting = true;
