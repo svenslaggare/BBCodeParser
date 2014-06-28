@@ -1,6 +1,7 @@
 BBCodeParser
 ============
-BB code parser written in TypeScript.
+An extensible BB code parser written in TypeScript that can be used
+both in the browser and Node.js.
 
 #Usage
 ```javascript
@@ -31,15 +32,15 @@ var html = parser.parseString('[b]Bold text[/b]');
 var bbTags = {};
 
 //Simple tag. A simple tag means that the generated HTML will be <tagName>content</tagName>
-bbTags["b"] = new BBTag("b", true, false, false);
+bbTags["b"] = BBTag.createSimpleTag("b");
 
 //Tag with a custom generator.
-bbTags["img"] = new BBTag("img", true, false, false, function (tag, content, attr) {
+bbTags["img"] = BBTag.createSimpleTag("img", function (tag, content, attr) {
 	return "<img src=\"" + content + "\" />";
 });
 
 //Tag with a custom generator + attributes
-bbTags["url"] = new BBTag("url", true, false, false, function (tag, content, attr) {
+bbTags["url"] = BBTag.createSimpleTag("url", function (tag, content, attr) {
 	var link = content;
 
 	if (attr["site"] != undefined) {
@@ -68,4 +69,4 @@ var parser = new BBCodeParser(bbTags);
 To run the build script you need:
 * Node.js
 * TypeScript (npm install -g typescript)
-* uglify-js (npm install uglify-js -g)
+* uglify-js (npm install -g uglify-js)

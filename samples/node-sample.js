@@ -3,7 +3,7 @@ var BBCodeParser = require('bbcode-parser');
 
 var parser = new BBCodeParser(BBCodeParser.defaultTags());
 
-// Parsers the URL path and returns it as HTML
+// Parses the URL path and returns it as HTML
 var server = http.createServer(function(req, res) {
 	res.end(parser.parseString(unescape(req.url.slice(1))));
 });
