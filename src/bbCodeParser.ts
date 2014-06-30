@@ -135,4 +135,17 @@ class BBCodeParser {
 
         return bbTags;
     }
+
+    public static escapeHTML(content: string) {
+        return escapeHTML(content);
+    }
+
+    public static startsWith(str:
+        string, startStr: string) {
+        return startsWith(str, startStr);
+    }
+
+    public static endsWith(str: string, endStr: string) {
+        return endsWith(str, endStr);
+    }
 }

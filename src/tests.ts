@@ -11,67 +11,66 @@ class TestTokenizer extends tsUnit.TestClass {
     }
 
     testCreateStartTag() {
-        var tokenizer = new Tokenizer(BBCodeParserSettings.defaultTags());
+        //var tokenizer = new TokenizerOld(BBCodeParser.defaultTags());
 
-        var startTag = tokenizer.createStartTagToken("[b]");
-        this.areIdentical("b", startTag.content);
+        //var startTag = tokenizer.createStartTagToken("[b]");
+        //this.areIdentical("b", startTag.content);
 
-        startTag = tokenizer.createStartTagToken("[b ]");
-        this.areIdentical("b", startTag.content);
+        //startTag = tokenizer.createStartTagToken("[b ]");
+        //this.areIdentical("b", startTag.content);
 
-        startTag = tokenizer.createStartTagToken("[code lang=\"java\"]");
-        this.areIdentical("code", startTag.content);
-        this.areIdentical("java", startTag.tagAttributes["lang"]);
+        //startTag = tokenizer.createStartTagToken("[code lang=\"java\"]");
+        //this.areIdentical("code", startTag.content);
+        //this.areIdentical("java", startTag.tagAttributes["lang"]);
 
-        startTag = tokenizer.createStartTagToken("[code lang=\"java\" tabs=\"false\"]");
-        this.areIdentical("code", startTag.content);
-        this.areIdentical("java", startTag.tagAttributes["lang"]);
-        this.areIdentical("false", startTag.tagAttributes["tabs"]);
+        //startTag = tokenizer.createStartTagToken("[code lang=\"java\" tabs=\"false\"]");
+        //this.areIdentical("code", startTag.content);
+        //this.areIdentical("java", startTag.tagAttributes["lang"]);
+        //this.areIdentical("false", startTag.tagAttributes["tabs"]);
 
-        startTag = tokenizer.createStartTagToken("[url=\"http://google.se\"]");
-        this.areIdentical("url", startTag.content);
-        this.areIdentical("http://google.se", startTag.tagAttributes["url"]);
+        //startTag = tokenizer.createStartTagToken("[url=\"http://google.se\"]");
+        //this.areIdentical("url", startTag.content);
+        //this.areIdentical("http://google.se", startTag.tagAttributes["url"]);
     }
 
     testTokenize() {
-        var tokenizer = new Tokenizer(BBCodeParserSettings.defaultTags());
+        var tokenizer = new Tokenizer(BBCodeParser.defaultTags());
 
         var tokens = tokenizer.tokenizeString("tja[b][i][u]Test[/u][/i][/b]då");
-        this.isTrue(new Token("tja", TokenType.Text).equals(tokens[0]));
-        this.isTrue(new Token("b", TokenType.StartTag).equals(tokens[1]));
-        this.isTrue(new Token("i", TokenType.StartTag).equals(tokens[2]));
-        this.isTrue(new Token("u", TokenType.StartTag).equals(tokens[3]));
-        this.isTrue(new Token("Test", TokenType.Text).equals(tokens[4]));
-        this.isTrue(new Token("u", TokenType.EndTag).equals(tokens[5]));
-        this.isTrue(new Token("i", TokenType.EndTag).equals(tokens[6]));
-        this.isTrue(new Token("b", TokenType.EndTag).equals(tokens[7]));
-        this.isTrue(new Token("då", TokenType.Text).equals(tokens[8]));
+        this.isTrue(new Token(TokenType.Text, "tja").equals(tokens[0]));
+        this.isTrue(new Token(TokenType.StartTag, "b").equals(tokens[1]));
+        this.isTrue(new Token(TokenType.StartTag, "i").equals(tokens[2]));
+        this.isTrue(new Token(TokenType.StartTag, "u").equals(tokens[3]));
+        this.isTrue(new Token(TokenType.Text, "Test").equals(tokens[4]));
+        this.isTrue(new Token(TokenType.EndTag, "u").equals(tokens[5]));
+        this.isTrue(new Token(TokenType.EndTag,"i").equals(tokens[6]));
+        this.isTrue(new Token(TokenType.EndTag,"b").equals(tokens[7]));
+        this.isTrue(new Token(TokenType.Text, "då").equals(tokens[8]));
 
         tokens = tokenizer.tokenizeString("[code][[1,2,3],[4,5,6]][/code]");
-        this.isTrue(new Token("code", TokenType.StartTag).equals(tokens[0]));
-        this.isTrue(new Token("[[1,2,3],[4,5,6]]", TokenType.Text).equals(tokens[1]));
-        this.isTrue(new Token("code", TokenType.EndTag).equals(tokens[2]));
+        this.isTrue(new Token(TokenType.StartTag, "code").equals(tokens[0]));
+        this.isTrue(new Token(TokenType.Text, "[[1,2,3],[4,5,6]]").equals(tokens[1]));
+        this.isTrue(new Token(TokenType.EndTag, "code").equals(tokens[2]));
 
         tokens = tokenizer.tokenizeString("[code]var elo = tja[0];[/code]");
-        this.isTrue(new Token("code", TokenType.StartTag).equals(tokens[0]));
-        this.isTrue(new Token("var elo = tja[0];", TokenType.Text).equals(tokens[1]));
-        this.isTrue(new Token("code", TokenType.EndTag).equals(tokens[2]));
+        this.isTrue(new Token(TokenType.StartTag, "code").equals(tokens[0]));
+        this.isTrue(new Token(TokenType.Text, "var elo = tja[0];").equals(tokens[1]));
+        this.isTrue(new Token(TokenType.EndTag, "code").equals(tokens[2]));
 
         tokens = tokenizer.tokenizeString("tja [b]fan[/b då");
-        this.isTrue(new Token("tja ", TokenType.Text).equals(tokens[0]));
-        this.isTrue(new Token("b", TokenType.StartTag).equals(tokens[1]));
-        this.isTrue(new Token("fan", TokenType.Text).equals(tokens[2]));
-        this.isTrue(new Token("[/b då", TokenType.Text).equals(tokens[3]));
+        this.isTrue(new Token(TokenType.Text, "tja ").equals(tokens[0]));
+        this.isTrue(new Token(TokenType.StartTag, "b").equals(tokens[1]));
+        this.isTrue(new Token(TokenType.Text, "fan[/b då").equals(tokens[2]));
 
         tokens = tokenizer.tokenizeString("Testa följande: a[0][0]?");
-        this.isTrue(new Token("Testa följande: a", TokenType.Text).equals(tokens[0]));
-        this.isTrue(new Token("[0]", TokenType.Text).equals(tokens[1]));
-        this.isTrue(new Token("[0]", TokenType.Text).equals(tokens[2]));
-        this.isTrue(new Token("?", TokenType.Text).equals(tokens[3]));
+        this.isTrue(new Token(TokenType.Text, "Testa följande: a").equals(tokens[0]));
+        this.isTrue(new Token(TokenType.Text, "[0]").equals(tokens[1]));
+        this.isTrue(new Token(TokenType.Text, "[0]").equals(tokens[2]));
+        this.isTrue(new Token(TokenType.Text, "?").equals(tokens[3]));
     }
 
     testBuildTree() {
-        var tags = BBCodeParserSettings.defaultTags();
+        var tags = BBCodeParser.defaultTags();
 
         var parseTree = BBCodeParseTree.buildTree("tja[b]test[/b]då", tags);
         this.areIdentical(3, parseTree.subTrees.length);
@@ -127,7 +126,7 @@ class TestTokenizer extends tsUnit.TestClass {
     }
 
     testParseString() {
-        var parser = new BBCodeParser(BBCodeParserSettings.defaultTags());
+        var parser = new BBCodeParser(BBCodeParser.defaultTags());
 
         var htmlStr = parser.parseString("[b]test[/b]");
         this.areIdentical("<b>test</b>", htmlStr);
@@ -147,9 +146,9 @@ class TestTokenizer extends tsUnit.TestClass {
         htmlStr = parser.parseString("Fungerar [b]foljande[/b]: [troll]The troll tag[/troll]?");
         this.areIdentical("Fungerar <b>foljande</b>: [troll]The troll tag[/troll]?", htmlStr);
 
-        htmlStr = parser.parseString("Kod: [code lang=\"javascript\"]function troll() { return lol(); }[/code]");
+        htmlStr = parser.parseString("Kod: [code lang=\"javascript\"]function troll() { return lol[0](); }[/code]");
         console.log(htmlStr);
-        this.areIdentical("Kod: <code class=\"javascript\">function troll() { return lol(); }</code>", htmlStr);
+        this.areIdentical("Kod: <code class=\"javascript\">function troll() { return lol[0](); }</code>", htmlStr);
 
         htmlStr = parser.parseString("Test\r\ndå!");
         this.areIdentical("Test<br>då!", htmlStr);
