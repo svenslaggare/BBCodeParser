@@ -25,12 +25,16 @@ function textToken(content: string) {
     return new Token(TokenType.Text, content);
 }
 
+var attrNameChars = "[a-zA-Z0-9\.\-_:;]";
+//var attrNameChars = "\\w";
+var attrValueChars = attrNameChars;
+
 //Creates a new tag token
 function tagToken(match) {
     if (match[1] == undefined) { //Start tag
         var tagName = match[2];
         var attributes = new Array<string>();
-        var attrPattern = /(\w+)?="(\w*)"/g;
+        var attrPattern = new RegExp("(" + attrNameChars + "+)?=\"(" + attrValueChars + "*)\"", "g");
 
         var attrStr = match[0].substr(1 + tagName.length, match[0].length - 2 - tagName.length);
 
@@ -118,7 +122,8 @@ class Tokenizer {
 
     //Gets the tokens from the given string
     getTokens(str: string) {
-        var tagPattern = /\[(\/\w*)\]|\[(\w*)+(="\w*")?( \w+="\w*")*\]/g;
+        var pattern = "\\[(\/\\w*)\\]|\\[(\\w*)+(=\"" + attrValueChars + "*\")?( " + attrNameChars + "+=\"" + attrValueChars + "*\")*\\]";
+        var tagPattern = new RegExp(pattern, "g");
         var tokens = new Array<Token>();
 
         var match;

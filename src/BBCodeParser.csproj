@@ -21,7 +21,7 @@
     <Content Include="bbCodeParseTree.ts" />
     <Content Include="test.html" />
     <Content Include="tests.ts" />
-    <Content Include="tokenizer.ts" />
+    <Content Include="tokenizer.old.ts" />
     <Content Include="tsUnit.ts" />
     <Content Include="web.config" />
   </ItemGroup>
@@ -35,7 +35,7 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="bbTag.ts" />
-    <TypeScriptCompile Include="tokenizer2.ts" />
+    <TypeScriptCompile Include="tokenizer.ts" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

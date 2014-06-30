@@ -67,6 +67,11 @@ class TestTokenizer extends tsUnit.TestClass {
         this.isTrue(new Token(TokenType.Text, "[0]").equals(tokens[1]));
         this.isTrue(new Token(TokenType.Text, "[0]").equals(tokens[2]));
         this.isTrue(new Token(TokenType.Text, "?").equals(tokens[3]));
+
+        tokens = tokenizer.tokenizeString("[url=\"http://google.se\"]Google.se[/url]");
+        this.isTrue(new Token(TokenType.StartTag, "url").equals(tokens[0]));
+        this.isTrue(new Token(TokenType.Text, "Google.se").equals(tokens[1]));
+        this.isTrue(new Token(TokenType.EndTag, "url").equals(tokens[2]));
     }
 
     testBuildTree() {
@@ -152,6 +157,9 @@ class TestTokenizer extends tsUnit.TestClass {
 
         htmlStr = parser.parseString("Test\r\ndå!");
         this.areIdentical("Test<br>då!", htmlStr);
+
+        var htmlStr = parser.parseString("[url=\"http://google.se\"]Google.se[/url]");
+        this.areIdentical("<a href=\"http://google.se\" target=\"_blank\">Google.se</a>", htmlStr);
     }
 }
 
