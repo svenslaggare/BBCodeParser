@@ -50,7 +50,7 @@ class BBCodeParser {
     }
 
     //Parses the given string 
-    public parseString(content: string) {
+    public parseString(content: string, stripTags = false) {
         //Create the parse tree
         var parseTree = BBCodeParseTree.buildTree(content, this.bbTags);
 
@@ -60,11 +60,11 @@ class BBCodeParser {
         }
 
         //Convert it to HTML
-        return this.treeToHtml(parseTree.subTrees, true);
+        return this.treeToHtml(parseTree.subTrees, true, stripTags);
     }
 
     //Converts the given subtrees into html
-    private treeToHtml(subTrees: Array<BBCodeParseTree>, insertLineBreak: boolean) {
+    private treeToHtml(subTrees: Array<BBCodeParseTree>, insertLineBreak: boolean, stripTags = false) {
         var htmlString = "";
         var suppressLineBreak = false;
 
@@ -83,8 +83,15 @@ class BBCodeParser {
             } else {
                 //Get the tag
                 var bbTag = this.bbTags[currentTree.content];
-                var content = this.treeToHtml(currentTree.subTrees, bbTag.InsertLineBreaks);
-                htmlString += bbTag.markupGenerator(bbTag, content, currentTree.attributes);
+                var content = this.treeToHtml(currentTree.subTrees, bbTag.InsertLineBreaks, stripTags);
+
+                //Check if to strip the tags
+                if (!stripTags) {
+                    htmlString += bbTag.markupGenerator(bbTag, content, currentTree.attributes);
+                } else {
+                    htmlString += content;
+                }
+
                 suppressLineBreak = bbTag.suppressLineBreaks;
             }
         });

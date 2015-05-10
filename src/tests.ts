@@ -10,29 +10,6 @@ class TestTokenizer extends tsUnit.TestClass {
         this.isTrue(endsWith("alla", "alla"));
     }
 
-    testCreateStartTag() {
-        //var tokenizer = new TokenizerOld(BBCodeParser.defaultTags());
-
-        //var startTag = tokenizer.createStartTagToken("[b]");
-        //this.areIdentical("b", startTag.content);
-
-        //startTag = tokenizer.createStartTagToken("[b ]");
-        //this.areIdentical("b", startTag.content);
-
-        //startTag = tokenizer.createStartTagToken("[code lang=\"java\"]");
-        //this.areIdentical("code", startTag.content);
-        //this.areIdentical("java", startTag.tagAttributes["lang"]);
-
-        //startTag = tokenizer.createStartTagToken("[code lang=\"java\" tabs=\"false\"]");
-        //this.areIdentical("code", startTag.content);
-        //this.areIdentical("java", startTag.tagAttributes["lang"]);
-        //this.areIdentical("false", startTag.tagAttributes["tabs"]);
-
-        //startTag = tokenizer.createStartTagToken("[url=\"http://google.se\"]");
-        //this.areIdentical("url", startTag.content);
-        //this.areIdentical("http://google.se", startTag.tagAttributes["url"]);
-    }
-
     testTokenize() {
         var tokenizer = new Tokenizer(BBCodeParser.defaultTags());
 
@@ -160,6 +137,18 @@ class TestTokenizer extends tsUnit.TestClass {
 
         var htmlStr = parser.parseString("[url=\"http://google.se\"]Google.se[/url]");
         this.areIdentical("<a href=\"http://google.se\" target=\"_blank\">Google.se</a>", htmlStr);
+    }
+
+    testStripTags() {
+        var parser = new BBCodeParser(BBCodeParser.defaultTags());
+        var htmlStr = parser.parseString("[b]test[/b]", true);
+        this.areIdentical("test", htmlStr);
+
+        htmlStr = parser.parseString("[b][i]test[/i][/b]", true);
+        this.areIdentical("test", htmlStr);
+
+        htmlStr = parser.parseString("begin [b][i]test[/i] again[/b] end", true);
+        this.areIdentical("begin test again end", htmlStr);
     }
 }
 
