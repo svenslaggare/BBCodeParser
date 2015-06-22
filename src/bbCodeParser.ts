@@ -50,7 +50,7 @@ class BBCodeParser {
     }
 
     //Parses the given string 
-    public parseString(content: string, stripTags = false) {
+    public parseString(content: string, stripTags = false, insertLineBreak = true) {
         //Create the parse tree
         var parseTree = BBCodeParseTree.buildTree(content, this.bbTags);
 
@@ -60,7 +60,7 @@ class BBCodeParser {
         }
 
         //Convert it to HTML
-        return this.treeToHtml(parseTree.subTrees, true, stripTags);
+        return this.treeToHtml(parseTree.subTrees, insertLineBreak, stripTags);
     }
 
     //Converts the given subtrees into html
