@@ -5,7 +5,7 @@ var parser = new BBCodeParser(BBCodeParser.defaultTags());
 
 // Parses the URL path and returns it as HTML
 var server = http.createServer(function(req, res) {
-	res.end(parser.parseString(unescape(req.url.slice(1))));
+	res.end(parser.parseString(unescape(req.url.slice(1)), true));
 });
 
 server.listen(3000);
