@@ -129,7 +129,6 @@ class TestTokenizer extends tsUnit.TestClass {
         this.areIdentical("Fungerar <b>foljande</b>: [troll]The troll tag[/troll]?", htmlStr);
 
         htmlStr = parser.parseString("Kod: [code lang=\"javascript\"]function troll() { return lol[0](); }[/code]");
-        console.log(htmlStr);
         this.areIdentical("Kod: <code class=\"javascript\">function troll() { return lol[0](); }</code>", htmlStr);
 
         htmlStr = parser.parseString("Test\r\ndå!");
@@ -137,6 +136,12 @@ class TestTokenizer extends tsUnit.TestClass {
 
         var htmlStr = parser.parseString("[url=\"http://google.se\"]Google.se[/url]");
         this.areIdentical("<a href=\"http://google.se\" target=\"_blank\">Google.se</a>", htmlStr);
+    }
+
+    testParseAttributes() {
+        var parser = new BBCodeParser(BBCodeParser.defaultTags());
+        var htmlStr = parser.parseString("[code lang=\"test-lang\"]x = 4[/code]");
+        this.areIdentical("<code class=\"test-lang\">x = 4</code>", htmlStr);
     }
 
     testStripTags() {

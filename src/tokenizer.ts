@@ -25,7 +25,7 @@ function textToken(content: string) {
     return new Token(TokenType.Text, content);
 }
 
-var attrNameChars = "[a-zA-Z0-9\.\\-_:;]";
+var attrNameChars = "[a-zA-Z0-9\\.\\-_:;/]";
 //var attrNameChars = "\\w";
 var attrValueChars = attrNameChars;
 
