@@ -134,8 +134,18 @@ class TestTokenizer extends tsUnit.TestClass {
         htmlStr = parser.parseString("Test\r\ndå!");
         this.areIdentical("Test<br>då!", htmlStr);
 
-        var htmlStr = parser.parseString("[url=\"http://google.se\"]Google.se[/url]");
+        htmlStr = parser.parseString("[url=\"http://google.se\"]Google.se[/url]");
         this.areIdentical("<a href=\"http://google.se\" target=\"_blank\">Google.se</a>", htmlStr);
+
+        //Test invalid
+        htmlStr = parser.parseString("[b]test[]");
+        this.areIdentical("[b]test[]", htmlStr);
+
+        htmlStr = parser.parseString("[]test[/b]");
+        this.areIdentical("[]test[/b]", htmlStr);
+
+        htmlStr = parser.parseString("[b]test[b]");
+        this.areIdentical("[b]test[b]", htmlStr);
     }
 
     testParseAttributes() {

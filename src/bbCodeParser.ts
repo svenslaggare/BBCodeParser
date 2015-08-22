@@ -55,7 +55,7 @@ class BBCodeParser {
         var parseTree = BBCodeParseTree.buildTree(content, this.bbTags);
 
         //If the tree is invalid, return the input as text
-        if (!parseTree.isValid()) {
+        if (parseTree == null || !parseTree.isValid()) {
             return content;
         }
 
