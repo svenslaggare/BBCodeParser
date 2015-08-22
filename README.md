@@ -3,7 +3,7 @@ BBCodeParser
 An extensible BB code parser written in TypeScript that can be used
 both in the browser and Node.js.
 
-#Usage
+# Usage
 ```javascript
 <script src="bbCodeParser.min.js"></script>
 ...
@@ -20,7 +20,7 @@ var parser = new BBCodeParser(BBCodeParser.defaultTags());
 var html = parser.parseString('[b]Bold text[/b]');
 ```
 
-#Custom tags
+# Custom tags
 <b>BBTag constructor:</b>
 * tagName: The name of the tag.
 * insertLineBreaks: Indicates if the tag inserts line breaks (\n -> `<br>`) in the content.
@@ -62,10 +62,10 @@ bbTags["code"] = new BBTag("code", true, false, true, function (tag, content, at
 var parser = new BBCodeParser(bbTags);
 ```
 
-#Documentation
+# Documentation
 [See the wiki](https://github.com/svenslaggare/BBCodeParser/wiki/Documentation).
 
-#Build
+# Build
 To run the build script you need:
 * Node.js
 * TypeScript (npm install -g typescript)
