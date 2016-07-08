@@ -50,7 +50,7 @@ class BBCodeParser {
     }
 
     //Parses the given string 
-    public parseString(content: string, stripTags = false, insertLineBreak = true) {
+    public parseString(content: string, stripTags = false, insertLineBreak = true, escapingHtml = true) {
         //Create the parse tree
         var parseTree = BBCodeParseTree.buildTree(content, this.bbTags);
 
@@ -60,11 +60,11 @@ class BBCodeParser {
         }
 
         //Convert it to HTML
-        return this.treeToHtml(parseTree.subTrees, insertLineBreak, stripTags);
+        return this.treeToHtml(parseTree.subTrees, insertLineBreak, escapingHtml, stripTags);
     }
 
     //Converts the given subtrees into html
-    private treeToHtml(subTrees: Array<BBCodeParseTree>, insertLineBreak: boolean, stripTags = false) {
+    private treeToHtml(subTrees: Array<BBCodeParseTree>, insertLineBreak: boolean, escapingHtml: boolean, stripTags = false) {
         var htmlString = "";
         var suppressLineBreak = false;
 
@@ -72,7 +72,9 @@ class BBCodeParser {
             if (currentTree.treeType == TreeType.Text) {
                 var textContent = currentTree.content;
 
-                textContent = escapeHTML(textContent);
+                if(escapingHtml){
+                    textContent = escapeHTML(textContent);
+                }
 
                 if (insertLineBreak && !suppressLineBreak) {
                     textContent = textContent.replace(/(\r\n|\n|\r)/gm, "<br>");
@@ -83,7 +85,7 @@ class BBCodeParser {
             } else {
                 //Get the tag
                 var bbTag = this.bbTags[currentTree.content];
-                var content = this.treeToHtml(currentTree.subTrees, bbTag.InsertLineBreaks, stripTags);
+                var content = this.treeToHtml(currentTree.subTrees, bbTag.InsertLineBreaks, escapingHtml, stripTags);
 
                 //Check if to strip the tags
                 if (!stripTags) {
