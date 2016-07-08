@@ -169,10 +169,10 @@ class TestTokenizer extends tsUnit.TestClass {
 
     testEscapingHtmlOption() {
         var parser = new BBCodeParser(BBCodeParser.defaultTags());
-        var htmlStr = parser.parseString('[b]String[/b] with <a href="">html</a><br/>', false, true)
+        var htmlStr = parser.parseString('[b]String[/b] with <a href="">html</a><br/>')
         this.areIdentical('<b>String</b> with &lt;a href=""&gt;html&lt;/a&gt;&lt;br/&gt;', htmlStr);
 
-        htmlStr = parser.parseString('[b]String[/b] with <a href="">html</a><br/> with no escaping html', false, false)
+        htmlStr = parser.parseString('[b]String[/b] with <a href="">html</a><br/> with no escaping html', false, true, false)
         this.areIdentical('<b>String</b> with <a href="">html</a><br/> with no escaping html', htmlStr);
 
     }

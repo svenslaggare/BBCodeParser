@@ -50,7 +50,7 @@ class BBCodeParser {
     }
 
     //Parses the given string 
-    public parseString(content: string, stripTags = false, escapingHtml = true, insertLineBreak = true) {
+    public parseString(content: string, stripTags = false, insertLineBreak = true, escapingHtml = true) {
         //Create the parse tree
         var parseTree = BBCodeParseTree.buildTree(content, this.bbTags);
 
