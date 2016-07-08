@@ -146,6 +146,7 @@ class TestTokenizer extends tsUnit.TestClass {
 
         htmlStr = parser.parseString("[b]test[b]");
         this.areIdentical("[b]test[b]", htmlStr);
+
     }
 
     testParseAttributes() {
@@ -164,6 +165,16 @@ class TestTokenizer extends tsUnit.TestClass {
 
         htmlStr = parser.parseString("begin [b][i]test[/i] again[/b] end", true);
         this.areIdentical("begin test again end", htmlStr);
+    }
+
+    testEscapingHtmlOption() {
+        var parser = new BBCodeParser(BBCodeParser.defaultTags());
+        var htmlStr = parser.parseString('[b]String[/b] with <a href="">html</a><br/>', false, true)
+        this.areIdentical('<b>String</b> with &lt;a href=""&gt;html&lt;/a&gt;&lt;br/&gt;', htmlStr);
+
+        htmlStr = parser.parseString('[b]String[/b] with <a href="">html</a><br/> with no escaping html', false, false)
+        this.areIdentical('<b>String</b> with <a href="">html</a><br/> with no escaping html', htmlStr);
+
     }
 }
 
