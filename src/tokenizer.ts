@@ -27,7 +27,7 @@ function textToken(content: string) {
 
 var attrNameChars = "[a-zA-Z0-9\\.\\-_:;/]";
 //var attrNameChars = "\\w";
-var attrValueChars = attrNameChars;
+var attrValueChars = "[a-zA-Z0-9\\.\\-_:;#/]";
 
 //Creates a new tag token
 function tagToken(match) {
