@@ -85,7 +85,7 @@ class BBCodeParser {
             } else {
                 //Get the tag
                 var bbTag = this.bbTags[currentTree.content];
-                var content = this.treeToHtml(currentTree.subTrees, bbTag.InsertLineBreaks, escapingHtml, stripTags);
+                var content = this.treeToHtml(currentTree.subTrees, bbTag.insertLineBreaks, escapingHtml, stripTags);
 
                 //Check if to strip the tags
                 if (!stripTags) {
