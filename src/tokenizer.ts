@@ -27,14 +27,14 @@ function textToken(content: string) {
 
 var attrNameChars = "[a-zA-Z0-9\\.\\-_:;/]";
 //var attrNameChars = "\\w";
-var attrValueChars = "[a-zA-Z0-9\\.\\-_:;#/]";
+var attrValueChars = ".";
 
 //Creates a new tag token
 function tagToken(match) {
     if (match[1] == undefined) { //Start tag
         var tagName = match[2];
         var attributes = new Array<string>();
-        var attrPattern = new RegExp("(" + attrNameChars + "+)?=\"(" + attrValueChars + "*)\"", "g");
+        var attrPattern = new RegExp("(" + attrNameChars + "+)?=([\"])(" + attrValueChars + "*)\2", "g");
 
         var attrStr = match[0].substr(1 + tagName.length, match[0].length - 2 - tagName.length);
 
