@@ -1,4 +1,4 @@
-﻿/// <reference path="bbCodeParser.ts" />
+/// <reference path="bbCodeParser.ts" />
 
 //The type of a token
 enum TokenType { Text, StartTag, EndTag }
@@ -27,23 +27,23 @@ function textToken(content: string) {
 
 var attrNameChars = "[a-zA-Z0-9\\.\\-_:;/]";
 //var attrNameChars = "\\w";
-var attrValueChars = ".";
+var attrValueChars = "[a-zA-Z0-9\\.\\-_:;#/\\s]";
 
 //Creates a new tag token
 function tagToken(match) {
     if (match[1] == undefined) { //Start tag
         var tagName = match[2];
         var attributes = new Array<string>();
-        var attrPattern = new RegExp("(" + attrNameChars + "+)?=([\"])(" + attrValueChars + "*)\2", "g");
+        var attrPattern = new RegExp("(" + attrNameChars + "+)?=([\"])(" + attrValueChars + "+)\\2", "g");
 
         var attrStr = match[0].substr(1 + tagName.length, match[0].length - 2 - tagName.length);
 
         var attrMatch;
         while (attrMatch = attrPattern.exec(attrStr)) {
             if (attrMatch[1] == undefined) { //The tag attribute
-                attributes[tagName] = attrMatch[2];
+                attributes[tagName] = attrMatch[3];
             } else { //Normal attribute
-                attributes[attrMatch[1]] = attrMatch[2];
+                attributes[attrMatch[1]] = attrMatch[3];
             }
         }
 
@@ -122,7 +122,7 @@ class Tokenizer {
 
     //Gets the tokens from the given string
     getTokens(str: string) {
-        var pattern = "\\[(\/\\w*)\\]|\\[(\\w*)+(=\"" + attrValueChars + "*\")?( " + attrNameChars + "+=\"" + attrValueChars + "*\")*\\]";
+        var pattern = "\\[(\/\\w*)\\]|\\[(\\w*)+(=([\"])" + attrValueChars + "*\\4)?( (" + attrNameChars + "+)?=([\"])(" + attrValueChars + "+)\\7)*\\]";
         var tagPattern = new RegExp(pattern, "g");
         var tokens = new Array<Token>();
 
