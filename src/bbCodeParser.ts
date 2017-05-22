@@ -1,4 +1,4 @@
-﻿/// <reference path="bbCodeParseTree.ts" />
+/// <reference path="bbCodeParseTree.ts" />
 /// <reference path="bbTag.ts" />
 
 //Indicates if the first string ends with the second str
@@ -45,11 +45,11 @@ function escapeHTML(html) {
 //Represents a BB code parser
 class BBCodeParser {
     //Creates a new parser with the given tags
-    constructor(private bbTags: Array<BBTag>) {
+    constructor(private bbTags: Array<BBTag>, private options = { escapeHTML: false }) {
 
     }
 
-    //Parses the given string 
+    //Parses the given string
     public parseString(content: string, stripTags = false, insertLineBreak = true, escapingHtml = true) {
         //Create the parse tree
         var parseTree = BBCodeParseTree.buildTree(content, this.bbTags);
@@ -73,7 +73,7 @@ class BBCodeParser {
                 var textContent = currentTree.content;
 
                 if(escapingHtml){
-                    textContent = escapeHTML(textContent);
+                    textContent = (this.options.escapeHTML) ? escapeHTML(textContent) : textContent;
                 }
 
                 if (insertLineBreak && !suppressLineBreak) {
@@ -100,7 +100,7 @@ class BBCodeParser {
 
         return htmlString;
     }
-    
+
     //Returns the default tags
     public static defaultTags(): Array<BBTag> {
         var bbTags = new Array<BBTag>();
